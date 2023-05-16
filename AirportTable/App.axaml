@@ -1,0 +1,20 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:AirportTable"
+             x:Class="AirportTable.App">
+
+	<Application.DataTemplates>
+		<local:ViewLocator/>
+	</Application.DataTemplates>
+
+	<Application.Styles>
+		<FluentTheme Mode="Light"/>
+	</Application.Styles>
+
+	<Application.Resources>
+		<Image x:Key="departureA" Source="/Assets/departureA.png"/>
+		<Image x:Key="departureB" Source="/Assets/departureB.png"/>
+		<Image x:Key="landingA" Source="/Assets/landingA.png"/>
+		<Image x:Key="landingB" Source="/Assets/landingB.png"/>
+	</Application.Resources>
+</Application>

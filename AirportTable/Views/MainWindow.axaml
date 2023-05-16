@@ -1,0 +1,202 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="720" d:DesignHeight="1000"
+        xmlns:vm="using:AirportTable.ViewModels"
+        x:Class="AirportTable.Views.MainWindow"
+		Background="#475562" Padding="7"
+        Icon="/Assets/SibSUTIS.ico"
+		Width="720" Height="1000"
+        Title="AirportTable">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Window.Styles>
+		<Style Selector="Window">
+			<Setter Property="MaxHeight" Value="1000"/>
+			<Setter Property="MaxWidth" Value="720"/>
+			
+			<Setter Property="MinHeight" Value="1000"/>
+			<Setter Property="MinWidth" Value="720"/>
+		</Style>
+		
+		<Style Selector="ListBoxItem">
+			<Setter Property="Padding" Value="13 11 0 12"/>
+			<Setter Property="Margin" Value="0 0 0 1"/>
+			<Setter Property="Background" Value="#1c242b"/>
+		</Style>
+	</Window.Styles>
+
+	<Panel>
+		<Grid RowDefinitions="auto,auto,*">
+			<StackPanel Orientation="Horizontal">
+				<Button Width="150" Height="48"
+						Margin="0 0 7 0" CornerRadius="2"
+						Background="#323B44" Padding="0"
+						Name="Button_A" Command="{Binding SelectA}">
+					<Canvas>
+						<Image Source="/Assets/departureA.png"
+							   Width="31" Height="24"
+							   Margin="15 10 0 0"/>
+						<TextBlock Foreground="#6F788B" Margin="60 12 0 0"
+								   FontSize="19" FontWeight="Bold"
+								   Text="Вылет"/>
+					</Canvas>
+				</Button>
+
+				<Button Width="150" Height="48"
+						CornerRadius="2" Background="#323B44" Padding="0"
+						Name="Button_B" Command="{Binding SelectB}">
+					<Canvas>
+						<Image Source="/Assets/landingA.png"
+							   Width="31" Height="24"
+							   Margin="15 10 0 0"/>
+						<TextBlock Foreground="#6F788B" Margin="60 12 0 0"
+								   FontSize="19" FontWeight="Bold"
+								   Text="Прилет"/>
+					</Canvas>
+				</Button>
+
+				<Canvas Margin="60 19 85 0">
+					<TextBlock Foreground="#8892a5"
+							   FontSize="11" FontWeight="UltraBold"
+							   Text="Обновить"/>
+					<Image Source="/Assets/reload.png"
+						   Width="15" Height="16"
+						   Margin="-19 -1 0 0"/>
+				</Canvas>
+
+				<Grid ColumnDefinitions="*,*,*" Margin="0 11 14 0">
+					<Button Foreground="#8892a5" Background="#0000"
+							CornerRadius="2" Padding="0"
+							Width="70" Height="28"  FontSize="17"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Name="Button_C" Command="{Binding SelectC}"
+							Grid.Column="0"
+							Content="Вчера"/>
+
+					<Button Foreground="#8892a5" Background="#0000"
+							CornerRadius="2" Padding="0"
+							Width="90" Height="28" FontSize="17"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Name="Button_D" Command="{Binding SelectD}"
+							Grid.Column="1"
+							Content="Сегодня"/>
+
+					<Button Foreground="#8892a5" Background="#0000"
+							CornerRadius="2" Padding="0"
+							Width="80" Height="28" FontSize="17"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Name="Button_E" Command="{Binding SelectE}"
+							Grid.Column="2"
+							Content="Завтра"/>
+				</Grid>
+			</StackPanel>
+
+			<Border Grid.Row="1" Padding="14 30 0 4"
+					BorderBrush="#5c6576" BorderThickness="0 1">
+				<Grid ColumnDefinitions="123*,157*,110*,82*,78*,136*">
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="0" Text="Рейс"/>
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="1" Text="{Binding ColumnText}"/>
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="2" Text="По расписанию"/>
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="3" Text="Расчётное"/>
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="4" Text="Сектор"/>
+					<TextBlock Foreground="#8892a5" FontSize="11"
+							   Height="16" VerticalAlignment="Center"
+							   Grid.Column="5" Text="Статус"/>
+				</Grid>
+			</Border>
+			<ListBox Grid.Row="2" Background="#0000"
+					 Items="{Binding Items}" PointerReleased="Released">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<Panel Width="123">
+									<Image HorizontalAlignment="Left"
+										   Width="16" Height="16"
+										   Source="{Binding Image}"/>
+									<TextBlock Margin="23 0 0 0"
+											   FontSize="15" Foreground="White"
+											   Text="{Binding Flight}"/>
+								</Panel>
+
+								<Panel Width="157">
+									<TextBlock FontSize="15" Foreground="White"
+											   Text="{Binding Destination}"/>
+								</Panel>
+								<Panel Width="80" Margin="0 0 30 0">
+									<TextBlock FontSize="15" Foreground="White"
+											   HorizontalAlignment="Right"
+											   Text="{Binding Time}"/>
+								</Panel>
+								<Panel Width="52" Margin="0 0 30 0">
+									<TextBlock FontSize="15" Foreground="White"
+											   HorizontalAlignment="Right"
+											   Text="{Binding TimeCount}"/>
+								</Panel>
+								<Panel Width="51" Margin="0 0 27 0">
+									<TextBlock FontSize="15" Foreground="White"
+											   HorizontalAlignment="Right"
+											   Text="{Binding Terminal}"/>
+								</Panel>
+								<TextBlock FontSize="15" Foreground="White"
+										   HorizontalAlignment="Right"
+										   Text="{Binding Status}"/>
+							</StackPanel>
+
+							<Border IsVisible="{Binding Visible}" Background="#eb7501"
+									Height="1" Margin="-13 12 0 0"/>
+							<StackPanel IsVisible="{Binding Visible}"
+										Orientation="Horizontal">
+								<Image Width="80" Height="80"
+									   Margin="0 16 0 0"
+									   Source="{Binding BigImage}"/>
+								<Panel Margin="44 11 0 0" Width="570">
+									<TextBlock FontSize="15" Foreground="White"
+											   Text="{Binding Path}"/>
+									<ItemsControl Margin="0 30 0 0" Items="{Binding Description}">
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<Border Margin="0 0 10 0" Padding="8">
+													<TextBlock Foreground="#d5d9e3" FontSize="13"
+															   Text="{Binding}"/>
+												</Border>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+
+										<ItemsControl.ItemsPanel>
+											<ItemsPanelTemplate>
+												<WrapPanel/>
+											</ItemsPanelTemplate>
+										</ItemsControl.ItemsPanel>
+									</ItemsControl>
+								</Panel>
+							</StackPanel>
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+
+		<TextBlock Foreground="#8f8"
+				   Text="{Binding Logg}"/>
+	</Panel>
+
+</Window>
